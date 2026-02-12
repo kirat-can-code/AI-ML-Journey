@@ -1,18 +1,24 @@
-NumPy Complete Practical Lesson (Keith Galli NumPy Tutorial, notes)
+NumPy Complete Practical Lesson
+
+(Keith Galli NumPy Tutorial — Structured Notes)
+
+🟦 Day 1 — NumPy Foundations & Core Array Operations
+
+Goal: Build a strong mental model of NumPy arrays, indexing, memory, and performance.
+
 Lesson 0 — What is NumPy & Why It Exists
-What NumPy is
 
 NumPy is a multi-dimensional array library for Python.
 
-It lets you work with:
+It allows efficient work with:
 
-1D arrays (vectors)
+1D arrays → Vectors
 
-2D arrays (matrices)
+2D arrays → Matrices
 
-3D+ arrays (tensors)
+3D+ arrays → Tensors
 
-It is the foundation of:
+NumPy is the foundation of:
 
 Pandas
 
@@ -25,34 +31,32 @@ Machine Learning libraries
 Why NumPy instead of Python lists?
 1️⃣ Speed
 
-Python lists store objects → slow
+Python lists store objects → slower
 
-NumPy stores raw values → fast
+NumPy stores raw values → faster
 
-2️⃣ Fixed data types
+2️⃣ Fixed Data Types
 
-NumPy arrays contain one data type
+One data type per array
 
-No type checking during iteration
+No runtime type checking
 
-3️⃣ Contiguous memory
+3️⃣ Contiguous Memory
 
-NumPy stores data next to each other
+Data stored next to each other in memory
 
 Enables:
 
-SIMD (Single Instruction Multiple Data)
+SIMD (Single Instruction, Multiple Data)
 
 CPU cache efficiency
 
-📌 Mental model
+📌 Mental Model
 
-NumPy arrays are like tightly packed boxes.
-Python lists are scattered boxes with labels.
+NumPy arrays = tightly packed boxes
+Python lists = scattered boxes with labels
 
 🧪 Practice 0
-
-Answer mentally:
 
 Why is NumPy faster than lists?
 
@@ -76,205 +80,106 @@ b = np.array([
 print(b)
 
 
-📌 Nest lists → higher dimensions
+📌 Nested lists → higher dimensions
 
 🧪 Practice 2
 
-Create:
+Create a 1D array: [10, 20, 30]
 
-A 1D array with values [10, 20, 30]
-
-A 2D array (3×2) of floats
+Create a 3×2 float array
 
 Lesson 3 — Array Properties
-a.ndim      # number of dimensions
-a.shape     # shape
-a.dtype     # data type
-a.size      # number of elements
-a.itemsize  # bytes per element
-a.nbytes    # total bytes
+a.ndim       # number of dimensions
+a.shape      # shape
+a.dtype      # data type
+a.size       # number of elements
+a.itemsize   # bytes per element
+a.nbytes     # total memory used
 
-Example
 a = np.array([1, 2, 3], dtype=np.int16)
+
 
 🧪 Practice 3
 
-Create an array with int8
+Create an int8 array
 
-Check how memory usage changes
+Observe memory usage differences
 
-Lesson 4 — Indexing & Slicing
-4.1 Basic Indexing
-arr[row, column]
-
+Lesson 4 — Indexing & Slicing (Basics)
 a = np.array([
     [1, 2, 3, 4, 5, 6, 7],
     [8, 9,10,11,12,13,14]
 ])
 
+Basic Indexing
 a[1, 5]   # → 13
 
-4.2 Row & Column Access
+Row & Column Access
 a[0, :]   # first row
 a[:, 2]   # third column
 
-4.3 Slicing with Steps
-a[0, 1:6:2]  # 2, 4, 6
+Slicing with Steps
+a[0, 1:6:2]   # → [2, 4, 6]
+
 
 🧪 Practice 4
-
-From the matrix above:
 
 Extract [9, 10, 11]
 
 Extract every second element from first row
 
-Lesson 5 — Modifying Values
-a[1, 5] = 20
+Lesson 15 — Advanced Indexing 🚀
 
-Replace entire column
-a[:, 2] = 5
+Advanced indexing allows selecting arbitrary elements using index arrays.
+It does not behave like simple slicing.
 
-Replace with sequence
-a[:, 2] = [1, 2]
-
-🧪 Practice 5
-
-Replace one column with zeros
-
-Replace one row with [9,9,9,9,9,9,9]
-
-Lesson 6 — 3D Arrays (Think “Outside → Inside”)
-b = np.array([
-    [[1,2],[3,4]],
-    [[5,6],[7,8]]
-])
+15.1 Indexing with Index Arrays
+a[[0, 1, 2], [2, 3, 4]]
 
 
-Access value 4:
+📌 Meaning:
 
-b[0, 1, 1]
+Select:
 
-🧪 Practice 6
+Row 0 → Column 2
 
-Extract [3,4,7,8]
+Row 1 → Column 3
 
-Replace them with [9,9,8,8]
+Row 2 → Column 4
 
-Lesson 7 — Creating Special Arrays
-np.zeros((3,3))
-np.ones((2,3))
-np.full((2,2), 99)
-np.eye(3)
+✅ Output is a 1D array of matched pairs
+❌ Not a submatrix
 
-Random
-np.random.rand(3,2)
-np.random.randint(0, 10, size=(3,3))
-
-🧪 Practice 7
-
-Create a 4×4 matrix of 7s
-
-Create random integers between 10–50
-
-Lesson 8 — Copy vs Reference ⚠️ (Very Important)
-
-❌ Wrong:
-
-b = a
+15.2 Mixing Index Lists + Slicing
+a[[0, 4, 5], 3:]
 
 
-✅ Correct:
+📌 Meaning:
 
-b = a.copy()
+Pick rows: 0, 4, 5
 
-🧪 Practice 8
+Pick columns: from index 3 to the end
 
-Prove to yourself that .copy() works
+✅ Output is a new 2D array
 
-Lesson 9 — Element-Wise Math
-a + 2
-a * 2
-a ** 2
-np.sin(a)
+🔑 Key Difference
+Feature	Basic Slicing	Advanced Indexing
+Uses	: ranges	Lists / arrays
+Output	View (often)	Copy (always)
+Shape	Predictable	Can change
+Power	Medium	🔥 Very High
 
+🧪 Practice 15
 
-Array + Array:
+Select diagonal elements using index arrays
 
-a + b
+Extract non-contiguous rows & columns
 
-🧪 Practice 9
+✅ Day 1 Coverage Summary
 
-Square all elements
-
-Compute sine of an array
-
-Lesson 10 — Linear Algebra
-Matrix multiplication
-np.matmul(a, b)
-
-Determinant
-np.linalg.det(matrix)
-
-Inverse
-np.linalg.inv(matrix)
-
-🧪 Practice 10
-
-Multiply two compatible matrices
-
-Find determinant of identity matrix
-
-Lesson 11 — Statistics
-np.min(arr)
-np.max(arr)
-np.sum(arr)
-
-
-Axis:
-
-np.sum(arr, axis=0)  # columns
-np.sum(arr, axis=1)  # rows
-
-🧪 Practice 11
-
-Find row-wise max
-
-Find column-wise sum
-
-Lesson 12 — Reshaping & Stacking
-arr.reshape((4,2))
-np.vstack([a, b])
-np.hstack([a, b])
-
-🧪 Practice 12
-
-Reshape a 1D array into 2D
-
-Stack two matrices vertically
-
-Lesson 13 — Loading Data from Files
-data = np.genfromtxt("data.txt", delimiter=",")
-data = data.astype(np.int32)
-
-Lesson 14 — Boolean Masking (Power Feature)
-data[data > 50]
-
-
-Multiple conditions:
-
-data[(data > 50) & (data < 100)]
-
-🧪 Practice 14
-
-Extract values > 30
-
-Extract values between 10 and 20
-
-Lesson 15 — Advanced Indexing
-a[[0,1,2], [2,3,4]]
-
-
-Mix slicing + lists:
-
-a[[0,4,5], 3:]
+✔ NumPy fundamentals
+✔ Memory model & performance
+✔ Array creation & properties
+✔ Indexing, slicing, and modification
+✔ Boolean masking
+✔ Advanced indexing (core NumPy superpower)
