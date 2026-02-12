@@ -183,3 +183,15 @@ Extract non-contiguous rows & columns
 ✔ Indexing, slicing, and modification
 ✔ Boolean masking
 ✔ Advanced indexing (core NumPy superpower)
+### 📓 Practice Notebook (Google Colab)
+
+- Hands-on practice covering:
+  - Array creation
+  - Indexing & slicing
+  - Boolean masking
+  - Advanced indexing
+
+👉 **Open in Google Colab:**  
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
+https://colab.research.google.com/github/kirat-can-code/AI-ML-Journey/blob/main/day-01/numpy_day1_practice.ipynb
+)
